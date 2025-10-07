@@ -1,9 +1,9 @@
-import { useState } from "react";
+
 import arcbookLogo from "/arcbooks-logo.png";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  
 
   return (
     <>
@@ -14,11 +14,7 @@ function App() {
       </div>
       <h1>No. 1 E-Commerce Platform</h1>
       <h2>Best Selling Books</h2>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
+      
     </>
   );
 }
