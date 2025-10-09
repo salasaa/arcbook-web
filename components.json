@@ -9,6 +9,7 @@
     "baseColor": "gray",
     "cssVariables": true,
     "prefix": ""
+    
   },
   "iconLibrary": "lucide",
   "aliases": {
@@ -19,4 +20,4 @@
     "hooks": "@/hooks"
   },
   "registries": {}
-}
+  }
