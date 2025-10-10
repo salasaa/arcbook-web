@@ -4,13 +4,13 @@ import './index.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { App } from '@/app';
 import { BrowserRouter } from 'react-router';
-import { Navbar } from './components/navbar';
+import NavbarEcommerce from '@/components/navbar-ecommerce';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <Navbar />
+        <NavbarEcommerce />
         <App />
       </ThemeProvider>
     </BrowserRouter>
