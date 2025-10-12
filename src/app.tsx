@@ -7,7 +7,7 @@ export function App() {
       <div className="w-full">
         <CarouselHero />
       </div>
-      <main className="mx-auto max-w-7xl px-4 md:px-6">
+      <main className="mx-auto max-w-7xl md:px-6">
         <div className="mt-8 flex flex-row gap-4 overflow-x-auto pb-4">
           <Book title="One Piece Vol. 97" isFiction />
           <Book title="Generasi Kembali ke Akar" isFiction={false} />

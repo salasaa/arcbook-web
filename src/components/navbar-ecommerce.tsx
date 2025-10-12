@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { SearchIcon } from 'lucide-react';
 import { ModeToggle } from '@/components/mode-toggle';
-import arcbookLogo from '@/assets/arcbooks-logo.png';
+import arcbookLogo from '@/assets/arcbooks-logo-new.png';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {

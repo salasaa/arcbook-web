@@ -2,6 +2,8 @@ import * as React from 'react';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
+
+import Autoplay, { type AutoplayOptionsType } from 'embla-carousel-autoplay';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -10,11 +12,12 @@ import { Button } from '@/components/ui/button';
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
-type CarouselPlugin = UseCarouselParameters[1];
+type CarouselPlugin = UseCarouselParameters[1] | AutoplayOptionsType[];
 
 type CarouselProps = {
   opts?: CarouselOptions;
   plugins?: CarouselPlugin;
+  autoplayOptions?: AutoplayOptionsType;
   orientation?: 'horizontal' | 'vertical';
   setApi?: (api: CarouselApi) => void;
 };
@@ -44,17 +47,32 @@ function Carousel({
   orientation = 'horizontal',
   opts,
   setApi,
-  plugins,
+  plugins: userPlugins,
   className,
   children,
+  autoplayOptions,
   ...props
 }: React.ComponentProps<'div'> & CarouselProps) {
+  type EmblaPlugin = Parameters<typeof useEmblaCarousel>[1] extends (infer U)[]
+    ? U
+    : never;
+  let activePlugins: EmblaPlugin[] = [];
+  if (userPlugins && Array.isArray(userPlugins)) {
+    activePlugins = [...userPlugins] as EmblaPlugin[];
+  }
+  if (autoplayOptions) {
+    activePlugins = [
+      ...activePlugins,
+      Autoplay(autoplayOptions) as EmblaPlugin,
+    ];
+  }
+
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,
       axis: orientation === 'horizontal' ? 'x' : 'y',
     },
-    plugins,
+    activePlugins,
   );
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
   const [canScrollNext, setCanScrollNext] = React.useState(false);
