@@ -7,6 +7,9 @@ import {
 } from '@/components/ui/card';
 import { StarIcon } from 'lucide-react';
 
+// TODO: ProductsList
+// export function ProductsList({ products }: { products: Product[] }) {}
+
 export function Book({
   title,
   isFiction,
