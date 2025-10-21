@@ -1,6 +1,5 @@
 import type { Route } from "./+types/home";
 import type { Products } from "~/modules/product/type";
-import { Loader2 } from "lucide-react";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -34,7 +33,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               <img
                 src={product.imageUrl}
                 alt={product.title}
-                className="size-52"
+                className="h-52 max-w-32"
               />
               <h2>{product.title}</h2>
             </li>
