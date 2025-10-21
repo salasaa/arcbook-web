@@ -1,5 +1,6 @@
 import type { Route } from "./+types/home";
 import type { Products } from "~/modules/product/type";
+import { ProductsGrid } from "~/modules/product/product-grid";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -16,30 +17,19 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     `${import.meta.env.VITE_BACKEND_API_URL}/products`
   );
   const products: Products = await response.json();
-  return products;
+  return { products };
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
-  const products = (loaderData ?? []) as Products;
+export default function HomeRoute({ loaderData }: Route.ComponentProps) {
+  const { products } = loaderData;
 
   return (
     <div>
       <h1>Arcbooks E-Commerce</h1>
 
-      <ul className="grid grid-cols-3">
-        {products.map((product) => {
-          return (
-            <li key={product.id}>
-              <img
-                src={product.imageUrl}
-                alt={product.title}
-                className="h-52 max-w-32"
-              />
-              <h2>{product.title}</h2>
-            </li>
-          );
-        })}
-      </ul>
+      <section>
+        <ProductsGrid products={products} />
+      </section>
     </div>
   );
 }
