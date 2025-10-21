@@ -1,4 +1,5 @@
 import type { Route } from "./+types/home";
+import type { Products } from "~/modules/product/type";
 import { Loader2 } from "lucide-react";
 
 export function meta({}: Route.MetaArgs) {
@@ -11,28 +12,8 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-type Product = {
-  id: string;
-  slug: string;
-  title: string;
-  author: string;
-  price: number;
-  priginalPrice: number;
-  description?: string | null;
-  imageUrl: string;
-  inStock: boolean;
-  publishYear: number;
-
-  categoryId: string;
-
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-type Products = Product[];
-
-export async function clientLoader({ params }: Route.ClientLoaderArgs) {
-  const response = await fetch(`http://localhost:3000/products`);
+export async function loader({ params }: Route.ClientLoaderArgs) {
+  const response = await fetch(`${process.env.BACKEND_API_URL}/products`);
   const products: Products = await response.json();
   return products;
 }
@@ -49,14 +30,26 @@ export function HydrateFallback() {
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const products = loaderData;
-
-  console.log({ products });
+  const products = (loaderData ?? []) as Products;
 
   return (
     <div>
-      <h1>Disini halaman Arcbooks</h1>
-      <pre>{JSON.stringify(products, null, 2)}</pre>
+      <h1>Arcbooks E-Commerce</h1>
+
+      <ul className="grid grid-cols-3">
+        {products.map((product) => {
+          return (
+            <li key={product.id}>
+              <img
+                src={product.imageUrl}
+                alt={product.title}
+                className="size-52"
+              />
+              <h2>{product.title}</h2>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
