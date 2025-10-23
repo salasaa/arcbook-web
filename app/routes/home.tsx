@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 import type { Products } from "~/modules/product/type";
-import { ProductsGrid } from "~/modules/product/product-grid";
+import { ProductsSlide } from "~/modules/product/product-slide";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -28,7 +28,7 @@ export default function HomeRoute({ loaderData }: Route.ComponentProps) {
       <h1>Arcbooks E-Commerce</h1>
 
       <section>
-        <ProductsGrid products={products} />
+        <ProductsSlide products={products} />
       </section>
     </div>
   );
