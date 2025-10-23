@@ -34,9 +34,13 @@ export function Hero() {
       <div className="hidden w-[30%] flex-col gap-4 lg:flex">
         <div className="flex-1">
           <Card className="h-full">
-            <CardContent className="flex h-full items-center justify-center bg-blue-100 p-6">
-              <span className="text-xl font-medium text-blue-800">
-                Banner Kanan Atas
+            <CardContent className="w-fullh-full items-center justify-center ">
+              <span className="text-xl font-medium text-dark-800">
+                <img
+                  src="/banner-1.jpg"
+                  alt="Banner kanan atas"
+                  className="w-full h-full object-cover"
+                />
               </span>
             </CardContent>
           </Card>

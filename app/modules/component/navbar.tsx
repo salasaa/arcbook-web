@@ -78,11 +78,11 @@ const SearchForm = ({ id }: { id: string }) => (
   <div className="relative hidden max-w-lg flex-1 md:block">
     <Input
       id={id}
-      className="peer h-9 ps-9 pe-2 w-72" // Ubah tinggi ke h-9 untuk konsistensi, lebar tetap
-      placeholder="Search for books, authors, or categories..." // UX: kasih deskripsi lebih jelas
+      className="peer h-9 ps-9 pe-2 w-full placeholder:text-gray-300 placeholder:italic"
+      placeholder="Search for books, authors, or categories..."
       type="search"
     />
-    <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
+    <div className="text-muted-foreground/40 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
       <SearchIcon size={16} />
     </div>
   </div>
@@ -123,7 +123,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        <div className="flex flex-1 items-center justify-start gap-8 max-md:hidden">
+        <div className="flex w-full max-w-xl mx-auto flex-1 items-center justify-start gap-8 max-md:hidden">
           <NavigationMenu>
             <NavigationMenuList className="gap-2">
               {navigationLinks.map((link, index) => (
