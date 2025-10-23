@@ -12,7 +12,7 @@ import type { Products } from "~/modules/product/type";
 export function ProductsSlide({ products }: { products: Products }) {
   return (
     <section>
-      <ul className="flex space-x-4 overflow-x-auto p-4">
+      <ul className="flex space-x-4 overflow-x-auto py-8 mt-8">
         {products.map((product) => {
           return (
             <li key={product.id}>

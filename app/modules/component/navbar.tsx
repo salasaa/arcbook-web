@@ -15,10 +15,7 @@ import {
   PopoverTrigger,
 } from "~/components/ui/popover";
 
-const navigationLinks = [
-  { href: "#", label: "Products" },
-  { href: "#", label: "Categories" },
-];
+const navigationLinks = [{ href: "#", label: "Categories" }];
 
 // --- Mobile Menu ---
 const MobileMenu = () => (
@@ -54,9 +51,9 @@ const MobileMenu = () => (
           <NavigationMenuItem className="w-full">
             <NavigationMenuLink
               href="#"
-              className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-md px-2"
+              className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-xl px-2"
             >
-              <ShoppingCart size={16} /> Cart
+              <ShoppingCart size={16} />
               <span className="ml-auto text-primary text-xs font-bold">2</span>
             </NavigationMenuLink>
           </NavigationMenuItem>
@@ -97,10 +94,9 @@ const RightActions = () => (
     <Button asChild variant="ghost" size="sm" className="text-sm">
       <a href="#">Sign In</a>
     </Button>
-    <Button asChild size="sm" className="text-sm">
+    <Button asChild size="sm" className="text-sm rounded-md">
       <a href="#" className="flex items-center gap-2">
         <ShoppingCart size={16} />
-        <span className="text-primary-foreground/60 text-xs font-bold">2</span>
       </a>
     </Button>
   </div>
@@ -110,17 +106,21 @@ export default function Navbar() {
   const id = useId();
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-background">
+    <header className="sticky top-0 z-40 border-b bg-white/30 dark:bg-dark-950/50 backdrop-blur-2xl transition-all duration-300 w-full ">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:px-6">
         <div className="flex items-center gap-4">
           <MobileMenu />
-          {/* <a
+          <a
             href="/"
             aria-label="Arcbooks Home"
             className="text-primary hover:text-primary/90"
           >
-            <img src={arcbookLogo} alt="Arcbooks Logo" className="h-8" />
-          </a> */}
+            <img
+              src="/arcbooks-logo.svg"
+              alt="Arcbooks Logo"
+              className="h-20"
+            />
+          </a>
         </div>
 
         <div className="flex flex-1 items-center justify-start gap-8 max-md:hidden">

@@ -1,10 +1,11 @@
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import Navbar from "~/modules/component/navbar";
 
 export default function LayoutMain() {
   return (
     <div>
       <Navbar />
+
       <Outlet />
 
       <footer>
