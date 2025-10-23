@@ -1,6 +1,8 @@
 import type { Route } from "./+types/home";
 import type { Products } from "~/modules/product/type";
 import { ProductsSlide } from "~/modules/product/product-slide";
+import { Hero } from "~/modules/component/hero";
+import Navbar from "~/modules/component/navbar";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -24,12 +26,12 @@ export default function HomeRoute({ loaderData }: Route.ComponentProps) {
   const { products } = loaderData;
 
   return (
-    <div>
-      <h1>Arcbooks E-Commerce</h1>
-
-      <section>
+    <div className="flex justify-center dark:bg-gray-900">
+      <div className="w-full max-w-7xl min-h-screen p-4 text-gray-800 transition-colors duration-200 sm:p-6 md:p-8 dark:bg-gray-900 dark:text-gray-100">
+        <Navbar />
+        <Hero />
         <ProductsSlide products={products} />
-      </section>
+      </div>
     </div>
   );
 }
