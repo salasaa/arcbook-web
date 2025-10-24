@@ -15,14 +15,9 @@ export function Hero() {
           <CarouselContent className="h-full">
             {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index} className="h-full">
-                <div className="h-full p-1">
-                  <Card className="h-full">
-                    <CardContent className="flex h-full items-center justify-center p-6">
-                      <span className="text-4xl font-semibold">
-                        Carousel {index + 1}
-                      </span>
-                    </CardContent>
-                  </Card>
+                <div className="h-full rounded-xl overflow-hidden relative">
+                  <img src="/banner-2.jpg" className="rounded-2xl" />
+                  <p>Konten ke {index + 1}</p>
                 </div>
               </CarouselItem>
             ))}
@@ -33,27 +28,23 @@ export function Hero() {
       </div>
       <div className="hidden w-[30%] flex-col gap-4 lg:flex">
         <div className="flex-1">
-          <Card className="h-full">
-            <CardContent className="w-fullh-full items-center justify-center ">
-              <span className="text-xl font-medium text-dark-800">
-                <img
-                  src="/banner-1.jpg"
-                  alt="Banner kanan atas"
-                  className="w-full h-full object-cover"
-                />
-              </span>
-            </CardContent>
-          </Card>
+          <span className="text-xl font-medium text-dark-800">
+            <img
+              src="/banner-1.jpg"
+              alt="Banner kanan atas"
+              className="w-full h-full object-cover rounded-xl"
+            />
+          </span>
         </div>
 
         <div className="flex-1">
-          <Card className="h-full">
-            <CardContent className="flex h-full items-center justify-center bg-green-100 p-6">
-              <span className="text-xl font-medium text-green-800">
-                Banner Kanan Bawah
-              </span>
-            </CardContent>
-          </Card>
+          <span className="text-xl font-medium text-dark-800">
+            <img
+              src="/banner-1.jpg"
+              alt="Banner kanan atas"
+              className="w-full h-full object-cover rounded-xl"
+            />
+          </span>
         </div>
       </div>
     </div>
