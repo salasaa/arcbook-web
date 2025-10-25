@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 import type { Products } from "~/modules/product/type";
-import { ProductsSlide } from "~/modules/product/product-slide";
+import { ProductsSlider } from "~/modules/product/product-slider";
 import { Hero } from "~/modules/component/hero";
 
 export function meta({}: Route.MetaArgs) {
@@ -31,7 +31,7 @@ export default function HomeRoute({ loaderData }: Route.ComponentProps) {
           <Hero />
         </section>
         <section>
-          <ProductsSlide products={products} />
+          <ProductsSlider products={products} />
         </section>
       </div>
     </div>

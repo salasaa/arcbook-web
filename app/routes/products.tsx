@@ -1,7 +1,6 @@
 import type { Route } from "./+types/products";
 import type { Products } from "~/modules/product/type";
-import { ProductsSlide } from "~/modules/product/product-slide";
-import { Hero } from "~/modules/component/hero";
+import { ProductsSlider } from "~/modules/product/product-slider";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -27,7 +26,7 @@ export default function ProductsRoute({ loaderData }: Route.ComponentProps) {
   return (
     <div className="flex justify-center dark:bg-gray-900">
       <section className="w-full max-w-7xl min-h-screen p-4 text-gray-800 transition-colors duration-200 sm:p-6 md:p-8 dark:bg-gray-900 dark:text-gray-100">
-        <ProductsSlide products={products} />
+        <ProductsSlider products={products} />
       </section>
     </div>
   );
