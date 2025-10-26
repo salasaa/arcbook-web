@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router";
 import Navbar from "~/modules/component/navbar";
+import { Footer } from "~/modules/component/footer";
 
 export default function LayoutMain() {
   return (
@@ -8,13 +9,7 @@ export default function LayoutMain() {
 
       <Outlet />
 
-      <footer>
-        <div className="container mx-auto py-4 text-center">
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Arcbooks. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

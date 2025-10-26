@@ -32,9 +32,13 @@ export default function ProductsSlugRoute({
   const { product } = loaderData;
   const [quantity, setQuantity] = useState(1);
 
+  function changeImage(imageUrl: string): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
-    <section className="w-full max-w-7xl min-h-screen p-4 text-gray-800 transition-colors duration-200 sm:p-6 md:p-8 dark:bg-gray-900 dark:text-gray-100">
-      <div className="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <section>
+      <div className="mx-auto max-w-5xl justify-center px-4 py-8 md:px-6">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           <div className="lg:w-1/3 flex-shrink-0">
             <div className="aspect-[3/4] w-full overflow-hidden border shadow-lg">
@@ -42,6 +46,13 @@ export default function ProductsSlugRoute({
                 src={product.imageUrl}
                 alt={product.title}
                 className="w-full h-full object-fill"
+              />
+            </div>
+            <div className="flex gap-4 py-4 overflow-x-auto">
+              <img
+                src={product.imageUrl}
+                className="size-16 sm:size-20 object-cover cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+                onClick={() => changeImage(product.imageUrl)}
               />
             </div>
           </div>
