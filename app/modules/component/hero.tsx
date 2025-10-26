@@ -17,7 +17,6 @@ export function Hero() {
               <CarouselItem key={index} className="h-full">
                 <div className="h-full rounded-xl overflow-hidden relative">
                   <img src="/banner-2.jpg" className="rounded-2xl" />
-                  <p>Konten ke {index + 1}</p>
                 </div>
               </CarouselItem>
             ))}

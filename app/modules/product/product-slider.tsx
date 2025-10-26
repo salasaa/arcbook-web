@@ -11,17 +11,7 @@ import type { Products } from "~/modules/product/type";
 
 export function ProductsSlider({ products }: { products: Products }) {
   return (
-    <section className="py-12">
-      <div className="flex justify-between items-center mb-6 px-4 md:px-0">
-        <h2 className="text-2xl font-bold">Top Selling</h2>
-        <Link
-          to="/products"
-          className="text-gray-500 hover:text-primary/50 font-medium whitespace-nowrap"
-        >
-          See more
-        </Link>
-      </div>
-
+    <section>
       <div className="relative mx-auto flex space-x-8">
         <ul className="flex space-x-4 overflow-x-auto py-8 ">
           {products.map((product) => {

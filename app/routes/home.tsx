@@ -2,6 +2,7 @@ import type { Route } from "./+types/home";
 import type { Products } from "~/modules/product/type";
 import { ProductsSlider } from "~/modules/product/product-slider";
 import { Hero } from "~/modules/component/hero";
+import { Link } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -31,6 +32,15 @@ export default function HomeRoute({ loaderData }: Route.ComponentProps) {
           <Hero />
         </section>
         <section>
+          <div className="flex justify-between items-center mt-8 px-4 md:px-0">
+            <h2 className="text-2xl font-bold">Top Selling</h2>
+            <Link
+              to="/products"
+              className="text-gray-500 hover:text-primary/50 font-medium whitespace-nowrap"
+            >
+              See more
+            </Link>
+          </div>
           <ProductsSlider products={products} />
         </section>
       </div>
