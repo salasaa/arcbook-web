@@ -5,7 +5,6 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "~/components/ui/carousel";
-import { Card, CardContent } from "~/components/ui/card";
 
 export function Hero() {
   return (

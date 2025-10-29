@@ -42,10 +42,10 @@ const MobileMenu = () => (
           </NavigationMenuItem>
           <NavigationMenuItem className="w-full">
             <NavigationMenuLink
-              href="#"
+              href="/login"
               className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-md px-2"
             >
-              <LogIn size={16} /> Sign In
+              <LogIn size={16} /> Login
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem className="w-full">
@@ -92,7 +92,7 @@ const SearchForm = ({ id }: { id: string }) => (
 const RightActions = () => (
   <div className="flex items-center gap-2">
     <Button asChild variant="ghost" size="sm" className="text-sm">
-      <a href="#">Sign In</a>
+      <a href="/login">Login</a>
     </Button>
     <Button asChild size="sm" className="text-sm rounded-md">
       <a href="#" className="flex items-center gap-2">
