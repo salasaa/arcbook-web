@@ -3,9 +3,11 @@ import { formatPrice } from "~/lib/format";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { Badge } from "~/components/ui/badge";
+import { Input } from "~/components/ui/input";
 import type { Route } from "./+types/products-slug";
 import type { Product, Products } from "~/modules/product/type";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCartIcon } from "lucide-react";
+import { Form } from "react-router";
 
 export function meta({ loaderData }: Route.MetaArgs) {
   return [
@@ -41,17 +43,17 @@ export default function ProductsSlugRoute({
       <div className="mx-auto max-w-5xl justify-center px-4 py-8 md:px-6">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           <div className="lg:w-1/3 flex-shrink-0">
-            <div className="aspect-[3/4] w-full overflow-hidden border shadow-lg">
+            <div className="w-full overflow-hidden border shadow-lg">
               <img
                 src={product.imageUrl}
                 alt={product.title}
-                className="w-full h-full object-fill"
+                className="h-full object-fit"
               />
             </div>
             <div className="flex gap-4 py-4 overflow-x-auto">
               <img
                 src={product.imageUrl}
-                className="size-16 sm:size-20 object-cover cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+                className="size-16 sm:size-20 object-fit cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
                 onClick={() => changeImage(product.imageUrl)}
               />
             </div>
@@ -105,7 +107,7 @@ export default function ProductsSlugRoute({
             </div>
 
             <div className="flex items-center gap-4 mb-8">
-              <div className="flex items-center border rounded-md">
+              <div className="flex items-center rounded-md">
                 <Button
                   variant="outline"
                   size="icon"
@@ -122,15 +124,18 @@ export default function ProductsSlugRoute({
                   +
                 </Button>
               </div>
-
-              <Button
-                size="lg"
-                className="flex-grow h-12 text-base"
-                disabled={!product.inStock}
-              >
-                <ShoppingCart size={20} className="mr-2" />
-                Add to Cart
-              </Button>
+              <Form method="post" className="flex w-full">
+                <input type="hidden" name="quantity" value={quantity} />
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="flex-grow h-12 text-base"
+                  disabled={!product.inStock}
+                >
+                  <ShoppingCartIcon size={20} className="mr-2" />
+                  Add to Cart
+                </Button>
+              </Form>
             </div>
           </div>
         </div>
