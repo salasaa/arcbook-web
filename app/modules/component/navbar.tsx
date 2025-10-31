@@ -1,5 +1,11 @@
 import { useId } from "react";
-import { SearchIcon, MenuIcon, ShoppingCart, LogIn } from "lucide-react";
+import {
+  SearchIcon,
+  MenuIcon,
+  ShoppingCart,
+  LogIn,
+  ChevronDownIcon,
+} from "lucide-react";
 // import { ModeToggle } from '@/components/mode-toggle';
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -14,62 +20,112 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+} from "~/components/ui/dropdown-menu";
 
 const navigationLinks = [{ href: "#", label: "Categories" }];
+
+const categoryLinks = [
+  { href: "/categories/comics", label: "Comics" },
+  { href: "/categories/fiction", label: "Fiction" },
+  { href: "/categories/non-fiction", label: "Non-Fiction" },
+];
+
+// --- Category Dropdown (Desktop) ---
+const CategoryDropdown = () => (
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button
+        variant="ghost"
+        className="text-muted-foreground hover:text-primary py-1.5 font-medium transition-colors gap-1"
+      >
+        Categories <ChevronDownIcon size={16} />
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56">
+      {categoryLinks.map((link, index) => (
+        <DropdownMenuItem key={index} asChild>
+          <a href={link.href}>{link.label}</a>
+        </DropdownMenuItem>
+      ))}
+    </DropdownMenuContent>
+  </DropdownMenu>
+);
 
 // --- Mobile Menu ---
 const MobileMenu = () => (
   <Popover>
-    <PopoverContent align="start" className="w-36 md:hidden">
-      <NavigationMenu className="max-w-none *:w-full">
-        <NavigationMenuList className="flex-col items-start gap-0">
-          {navigationLinks.map((link, index) => (
-            <NavigationMenuItem key={index} className="w-full">
-              <NavigationMenuLink
-                href={link.href}
-                className="py-1.5 font-medium hover:bg-accent/50 block rounded-md px-2"
+    <ul>
+      <li>
+        <PopoverContent align="start" className="w-36 md:hidden">
+          <NavigationMenu className="max-w-none *:w-full">
+            <NavigationMenuList className="flex-col items-start gap-0">
+              <NavigationMenuItem className="w-full">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <div className="py-1.5 font-medium hover:bg-accent/50 block rounded-md px-2 justify-between items-center w-full cursor-pointer">
+                      Categories <ChevronDownIcon size={16} />
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    side="right"
+                    align="start"
+                    className="w-40"
+                  >
+                    {categoryLinks.map((link, index) => (
+                      <DropdownMenuItem key={index} asChild>
+                        <a href={link.href}>{link.label}</a>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem
+                className="w-full"
+                role="presentation"
+                aria-hidden="true"
               >
-                {link.label}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          ))}
-          <NavigationMenuItem
-            className="w-full"
-            role="presentation"
-            aria-hidden="true"
+                <div
+                  role="separator"
+                  className="bg-border -mx-1 my-1 h-px"
+                ></div>
+              </NavigationMenuItem>
+              <NavigationMenuItem className="w-full">
+                <NavigationMenuLink
+                  href="/login"
+                  className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-md px-2"
+                >
+                  <LogIn size={16} /> Login
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem className="w-full">
+                <NavigationMenuLink
+                  href="#"
+                  className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-xl px-2"
+                >
+                  <ShoppingCart size={16} />
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </PopoverContent>
+        <PopoverTrigger asChild>
+          <Button
+            className="size-8 md:hidden"
+            variant="ghost"
+            size="icon"
+            aria-label="Toggle navigation menu"
           >
-            <div role="separator" className="bg-border -mx-1 my-1 h-px"></div>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="w-full">
-            <NavigationMenuLink
-              href="/login"
-              className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-md px-2"
-            >
-              <LogIn size={16} /> Login
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="w-full">
-            <NavigationMenuLink
-              href="#"
-              className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-xl px-2"
-            >
-              <ShoppingCart size={16} />
-              <span className="ml-auto text-primary text-xs font-bold">2</span>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-    </PopoverContent>
-    <PopoverTrigger asChild>
-      <Button
-        className="size-8 md:hidden"
-        variant="ghost"
-        size="icon"
-        aria-label="Toggle navigation menu"
-      >
-        <MenuIcon size={20} />
-      </Button>
-    </PopoverTrigger>
+            <MenuIcon size={20} />
+          </Button>
+        </PopoverTrigger>
+      </li>
+    </ul>
   </Popover>
 );
 
@@ -124,20 +180,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex w-full max-w-xl mx-auto flex-1 items-center justify-start gap-8 max-md:hidden">
-          <NavigationMenu>
-            <NavigationMenuList className="gap-2">
-              {navigationLinks.map((link, index) => (
-                <NavigationMenuItem key={index}>
-                  <NavigationMenuLink
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary py-1.5 font-medium transition-colors"
-                  >
-                    {link.label}
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+          <CategoryDropdown />
 
           <SearchForm id={id} />
         </div>

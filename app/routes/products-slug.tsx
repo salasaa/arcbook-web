@@ -3,7 +3,6 @@ import { formatPrice } from "~/lib/format";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { Badge } from "~/components/ui/badge";
-import { Input } from "~/components/ui/input";
 import type { Route } from "./+types/products-slug";
 import type { Product, Products } from "~/modules/product/type";
 import { ShoppingCartIcon } from "lucide-react";
