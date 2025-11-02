@@ -8,7 +8,7 @@ import {
   FieldLabel,
 } from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
-import { Link } from "react-router";
+import { Link, Form } from "react-router";
 
 export function LoginForm({
   className,
@@ -18,7 +18,7 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <Form method="POST" className="space-y-6 p-6 md:p-8">
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -33,6 +33,7 @@ export function LoginForm({
                   id="email"
                   type="email"
                   placeholder="m@example.com"
+                  name="email"
                   required
                 />
               </Field>
@@ -46,13 +47,13 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" name="password" required />
               </Field>
               <Field>
                 <Button type="submit">Login</Button>
               </Field>
             </FieldGroup>
-          </form>
+          </Form>
           <div className="bg-muted relative hidden md:block">
             <img
               src="https://3mqxc38j34.ucarecd.net/30ff7c99-90f5-467c-b3ec-dc8d39ed21e2/-/preview/1000x666/"

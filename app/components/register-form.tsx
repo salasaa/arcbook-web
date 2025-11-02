@@ -8,7 +8,7 @@ import {
   FieldLabel,
 } from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
-import { Link } from "react-router";
+import { Link, Form } from "react-router";
 
 export function RegisterForm({
   className,
@@ -18,7 +18,7 @@ export function RegisterForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <Form method="POST" className="space-y-6 p-6 md:p-8">
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Create New Account</h1>
@@ -64,7 +64,7 @@ export function RegisterForm({
                 <Button type="submit">Register</Button>
               </Field>
             </FieldGroup>
-          </form>
+          </Form>
           <div className="bg-muted relative hidden md:block">
             <img
               src="https://3mqxc38j34.ucarecd.net/1723a4e6-e796-4146-b0db-39a399b68b15/-/preview/1000x667/"

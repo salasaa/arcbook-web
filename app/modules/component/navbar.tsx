@@ -150,11 +150,14 @@ const RightActions = () => (
     <Button asChild variant="ghost" size="sm" className="text-sm">
       <a href="/login">Login</a>
     </Button>
-    <Button asChild size="sm" className="text-sm rounded-md">
+    <Button asChild variant="secondary" size="sm" className="text-sm">
+      <a href="/register">Register</a>
+    </Button>
+    {/* <Button asChild size="sm" className="text-sm rounded-md">
       <a href="#" className="flex items-center gap-2">
         <ShoppingCart size={16} />
       </a>
-    </Button>
+    </Button> */}
   </div>
 );
 
