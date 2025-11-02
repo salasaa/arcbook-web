@@ -10,7 +10,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { Link } from "react-router";
 
-export function RegisterForm({
+export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -21,53 +21,41 @@ export function RegisterForm({
           <form className="p-6 md:p-8">
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">Create New Account</h1>
+                <h1 className="text-2xl font-bold">Welcome back</h1>
                 <FieldDescription className="text-center">
-                  Have an account? <Link to="/login">Log in here</Link>
+                  Don&apos;t have an account?{" "}
+                  <Link to="/register">Register here</Link>
                 </FieldDescription>
               </div>
-              <Field>
-                <FieldLabel htmlFor="username">Username</FieldLabel>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="your_username"
-                  name="username"
-                  required
-                />
-              </Field>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="your@email.com"
-                  name="email"
+                  placeholder="m@example.com"
                   required
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="full-name">Full Name</FieldLabel>
-                <Input
-                  id="full-name"
-                  type="text"
-                  placeholder="Your Full Name"
-                  name="fullName"
-                  required
-                />
+                <div className="flex items-center">
+                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <a
+                    href="#"
+                    className="ml-auto text-sm underline-offset-2 hover:underline"
+                  >
+                    Forgot your password?
+                  </a>
+                </div>
+                <Input id="password" type="password" required />
               </Field>
               <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
-                <Input id="password" type="password" name="password" required />
-              </Field>
-              <Field>
-                <Button type="submit">Register</Button>
+                <Button type="submit">Login</Button>
               </Field>
             </FieldGroup>
           </form>
           <div className="bg-muted relative hidden md:block">
             <img
-              src="https://3mqxc38j34.ucarecd.net/1723a4e6-e796-4146-b0db-39a399b68b15/-/preview/1000x667/"
+              src="https://3mqxc38j34.ucarecd.net/30ff7c99-90f5-467c-b3ec-dc8d39ed21e2/-/preview/1000x666/"
               alt="Image"
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
             />

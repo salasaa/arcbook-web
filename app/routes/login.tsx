@@ -1,4 +1,15 @@
-import { LoginForm } from "~/components/login-form"
+import type { Route } from "./+types/login";
+import { LoginForm } from "~/components/login-form";
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Register - Arcbooks E-Commerce" },
+    {
+      name: "description",
+      content: "Simple e-commerce for buying books",
+    },
+  ];
+}
 
 export default function LoginPage() {
   return (
@@ -7,5 +18,5 @@ export default function LoginPage() {
         <LoginForm />
       </div>
     </div>
-  )
+  );
 }
