@@ -1,7 +1,5 @@
 import type { Route } from "./+types/register";
-import { Form } from "react-router";
-import { Label } from "~/components/ui/label";
-import { Input } from "~/components/ui/input";
+import { RegisterForm } from "~/components/register-form";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -15,15 +13,10 @@ export function meta({}: Route.MetaArgs) {
 
 export default function RegisterRoute({}: Route.ComponentProps) {
   return (
-    <div>
-      <h1>Create new account</h1>
-
-      {/* <Form>
-        <div>
-          <Label htmlFor="username">Username</Label>
-          <Input id="username" type="text" name="username" />
-        </div>
-      </Form> */}
+    <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm md:max-w-4xl">
+        <RegisterForm />
+      </div>
     </div>
   );
 }
