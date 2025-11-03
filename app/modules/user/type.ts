@@ -3,8 +3,8 @@ export type User = {
   username: string;
   email: string;
   fullName: string;
-  createAt: Date;
-  updateAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type RegisterResponse = User;
