@@ -1,5 +1,7 @@
 import type { Route } from "./+types/register";
 import { RegisterForm } from "~/components/register-form";
+import type { RegisterResponse } from "~/modules/user/type";
+import { redirect } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -24,20 +26,24 @@ export default function RegisterRoute({}: Route.ComponentProps) {
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();
 
-  const username = formData.get("username")?.toString();
-  const email = formData.get("email")?.toString();
-  const fullName = formData.get("fullName")?.toString();
-  const password = formData.get("password")?.toString();
-
   const registerBody = {
-    username,
-    email,
-    fullName,
-    password,
+    username: formData.get("username")?.toString(),
+    email: formData.get("email")?.toString(),
+    fullName: formData.get("fullName")?.toString(),
+    password: formData.get("password")?.toString(),
   };
 
-  console.log(registerBody);
+  const response = await fetch(
+    `${import.meta.env.VITE_BACKEND_API_URL}/auth/register`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(registerBody),
+    }
+  );
+  const registerResponse: RegisterResponse = await response.json();
 
-  // const project = await someApi.updateProject({ title });
-  return null;
+  console.log(registerResponse);
+
+  return redirect("/login");
 }

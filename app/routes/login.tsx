@@ -35,5 +35,11 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   console.log(loginBody);
 
   // const project = await someApi.updateProject({ title });
+
+  // const response = await fetch(
+  //   `${import.meta.env.VITE_BACKEND_API_URL}/auth/login`
+  // );
+  // const loginResponse: LoginResponse = await response.json();
+
   return null;
 }
