@@ -27,8 +27,6 @@ import {
   DropdownMenuItem,
 } from "~/components/ui/dropdown-menu";
 
-const navigationLinks = [{ href: "#", label: "Categories" }];
-
 const categoryLinks = [
   { href: "/categories/comics", label: "Comics" },
   { href: "/categories/fiction", label: "Fiction" },

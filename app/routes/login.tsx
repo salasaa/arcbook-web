@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 import type { Route } from "./+types/login";
 import { LoginForm } from "~/components/login-form";
 import type { LoginResponse } from "~/modules/user/type";
@@ -43,6 +45,8 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   const loginResponse: LoginResponse = await response.text();
 
   console.log(loginResponse);
+
+  Cookies.set("token", loginResponse);
 
   return redirect("/dashboard");
 }
