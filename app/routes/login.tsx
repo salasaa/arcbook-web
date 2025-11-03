@@ -40,7 +40,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
       body: JSON.stringify(loginBody),
     }
   );
-  const loginResponse: LoginResponse = await response.json();
+  const loginResponse: LoginResponse = await response.text();
 
   console.log(loginResponse);
 
