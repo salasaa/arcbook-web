@@ -28,7 +28,7 @@ export function DashboardForm({
             <p>Your Profile Information</p>
           </div>
           <FieldSeparator className="my-4" />
-          <CardContent className="grid p-0 md:grid-cols-2">
+          <CardContent className="grid p-0 grid-cols-1 sm:grid-cols-2">
             <FieldGroup>
               <Field>
                 <FieldLabel>Full Name</FieldLabel>
@@ -39,26 +39,26 @@ export function DashboardForm({
                 <FieldDescription>{meResponse.username}</FieldDescription>
               </Field>
               <Field>
-                <FieldLabel>Email</FieldLabel>
-                <FieldDescription>{meResponse.email}</FieldDescription>
+                <FieldLabel>Created At</FieldLabel>
+                <FieldDescription>
+                  {formatDateTime(meResponse.createdAt as unknown as string)}
+                </FieldDescription>
               </Field>
             </FieldGroup>
 
-            <FieldGroup>
+            <FieldGroup className="mt-8 sm:mt-0">
               <Field>
                 <FieldLabel>User ID</FieldLabel>
                 <FieldDescription>{meResponse.id}</FieldDescription>
               </Field>
               <Field>
+                <FieldLabel>Email</FieldLabel>
+                <FieldDescription>{meResponse.email}</FieldDescription>
+              </Field>
+              <Field>
                 <FieldLabel>Updated At</FieldLabel>
                 <FieldDescription>
                   {formatDateTime(meResponse.updatedAt as unknown as string)}
-                </FieldDescription>
-              </Field>
-              <Field>
-                <FieldLabel>Created At</FieldLabel>
-                <FieldDescription>
-                  {formatDateTime(meResponse.createdAt as unknown as string)}
                 </FieldDescription>
               </Field>
             </FieldGroup>
