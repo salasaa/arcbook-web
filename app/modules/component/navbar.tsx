@@ -25,6 +25,12 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
+  DropdownMenuGroup,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+  DropdownMenuPortal,
 } from "~/components/ui/dropdown-menu";
 
 const categoryLinks = [
@@ -32,8 +38,14 @@ const categoryLinks = [
   { href: "/categories/fiction", label: "Fiction" },
   { href: "/categories/non-fiction", label: "Non-Fiction" },
 ];
+export const authorLinks = [
+  { href: "/authors/eiichiro-oda", label: "Eiichiro Oda" },
+  { href: "/authors/guru-gembul", label: "Guru Gembul" },
+  { href: "/authors/dr-muhammad-faisal", label: "Dr. Muhammad Faisal" },
+  { href: "/authors/grant-snider", label: "Grant Snider" },
+  { href: "/authors/t-a-s-a", label: "T.A.S.A" },
+];
 
-// --- Category Dropdown (Desktop) ---
 const CategoryDropdown = () => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
@@ -45,11 +57,35 @@ const CategoryDropdown = () => (
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent className="w-56">
-      {categoryLinks.map((link, index) => (
-        <DropdownMenuItem key={index} asChild>
-          <a href={link.href}>{link.label}</a>
-        </DropdownMenuItem>
-      ))}
+      <DropdownMenuGroup>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>Books</DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              {categoryLinks.map((link, index) => (
+                <DropdownMenuItem key={index} asChild>
+                  <a href={link.href}>{link.label}</a>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>Authors</DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              {authorLinks.map((link, index) => (
+                <DropdownMenuItem key={index} asChild>
+                  <a href={link.href}>{link.label}</a>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+      </DropdownMenuGroup>
     </DropdownMenuContent>
   </DropdownMenu>
 );
@@ -74,6 +110,7 @@ const MobileMenu = () => (
                     align="start"
                     className="w-40"
                   >
+                    <p className="px-2 py-1.5 text-sm font-bold">Categories</p>
                     {categoryLinks.map((link, index) => (
                       <DropdownMenuItem key={index} asChild>
                         <a href={link.href}>{link.label}</a>
@@ -103,10 +140,10 @@ const MobileMenu = () => (
               </NavigationMenuItem>
               <NavigationMenuItem className="w-full">
                 <NavigationMenuLink
-                  href="#"
-                  className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-xl px-2"
+                  href="/register"
+                  className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-md px-2"
                 >
-                  <ShoppingCart size={16} />
+                  <LogIn size={16} /> Register
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
