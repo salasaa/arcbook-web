@@ -32,6 +32,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuPortal,
 } from "~/components/ui/dropdown-menu";
+import { Link } from "react-router";
 
 const categoryLinks = [
   { href: "/categories/comics", label: "Comics" },
@@ -181,19 +182,25 @@ const SearchForm = ({ id }: { id: string }) => (
 
 // --- Right Actions (Desktop) ---
 const RightActions = () => (
-  <div className="flex items-center gap-2">
-    <Button asChild variant="ghost" size="sm" className="text-sm">
-      <a href="/login">Login</a>
-    </Button>
-    <Button asChild variant="secondary" size="sm" className="text-sm">
-      <a href="/register">Register</a>
-    </Button>
-    {/* <Button asChild size="sm" className="text-sm rounded-md">
-      <a href="#" className="flex items-center gap-2">
-        <ShoppingCart size={16} />
-      </a>
-    </Button> */}
-  </div>
+  <nav>
+    <ul>
+      <li>
+        <div className="flex items-center gap-2">
+          <Button asChild variant="ghost" size="sm" className="text-sm">
+            <a href="/login">Login</a>
+          </Button>
+          <Button asChild variant="secondary" size="sm" className="text-sm">
+            <a href="/register">Register</a>
+          </Button>
+          <Button asChild size="sm" className="text-sm rounded-md">
+            <a href="/cart" className="flex items-center gap-2">
+              <ShoppingCart size={16} />
+            </a>
+          </Button>
+        </div>
+      </li>
+    </ul>
+  </nav>
 );
 
 export default function Navbar() {
