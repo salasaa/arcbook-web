@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 import { useState } from "react";
 import { formatPrice } from "~/lib/format";
 import { Button } from "~/components/ui/button";
@@ -6,7 +8,8 @@ import { Badge } from "~/components/ui/badge";
 import type { Route } from "./+types/products-slug";
 import type { Product, Products } from "~/modules/product/type";
 import { ShoppingCartIcon } from "lucide-react";
-import { Form } from "react-router";
+import { Form, redirect } from "react-router";
+import { Input } from "~/components/ui/input";
 
 export function meta({ loaderData }: Route.MetaArgs) {
   return [
@@ -27,11 +30,42 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   return { product };
 }
 
+export async function clientAction({ request }: Route.ClientActionArgs) {
+  const token = Cookies.get("token");
+
+  const formData = await request.formData();
+
+  const addCartItemData = {
+    productId: String(formData.get("productId")),
+    quantity: Number(formData.get("quantity")),
+  };
+
+  if (!token) return redirect("/login");
+
+  const response = await fetch(
+    `${import.meta.env.VITE_BACKEND_API_URL}/cart/items`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addCartItemData),
+    }
+  );
+
+  if (!response.ok) {
+    Cookies.remove("token");
+    return redirect("/login");
+  }
+
+  return redirect("/cart");
+}
+
 export default function ProductsSlugRoute({
   loaderData,
 }: Route.ComponentProps) {
   const { product } = loaderData;
-  const [quantity, setQuantity] = useState(1);
 
   function changeImage(imageUrl: string): void {
     throw new Error("Function not implemented.");
@@ -105,26 +139,28 @@ export default function ProductsSlugRoute({
               </div>
             </div>
 
-            <div className="flex items-center gap-4 mb-8">
-              <div className="flex items-center rounded-md">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                >
-                  -
-                </Button>
-                <span className="w-10 text-center font-medium">{quantity}</span>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => setQuantity((q) => q + 1)}
-                >
-                  +
-                </Button>
-              </div>
-              <Form method="post" className="flex w-full">
-                <input type="hidden" name="quantity" value={quantity} />
+            <div className="flex flex-row items-center gap-4 mb-8">
+              <Form method="POST" className="flex w-full gap-4">
+                <div>
+                  <label
+                    htmlFor="quantity"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  ></label>
+                  <input
+                    type="hidden"
+                    name="productId"
+                    defaultValue={product.id}
+                  />
+                  <Input
+                    id="quantity"
+                    name="quantity"
+                    type="number"
+                    min="1"
+                    defaultValue="1"
+                    required
+                    className="w-24 border border-muted-foreground/30"
+                  />
+                </div>
                 <Button
                   type="submit"
                   size="lg"
