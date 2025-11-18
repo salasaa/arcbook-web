@@ -1,11 +1,5 @@
 import { useId } from "react";
-import {
-  SearchIcon,
-  MenuIcon,
-  ShoppingCart,
-  LogIn,
-  ChevronDownIcon,
-} from "lucide-react";
+import { SearchIcon, ShoppingCart, ChevronDownIcon } from "lucide-react";
 // import { ModeToggle } from '@/components/mode-toggle';
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -92,82 +86,12 @@ const CategoryDropdown = () => (
 );
 
 // --- Mobile Menu ---
-const MobileMenu = () => (
-  <Popover>
-    <ul>
-      <li>
-        <PopoverContent align="start" className="w-36 md:hidden">
-          <NavigationMenu className="max-w-none *:w-full">
-            <NavigationMenuList className="flex-col items-start gap-0">
-              <NavigationMenuItem className="w-full">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <div className="py-1.5 font-medium hover:bg-accent/50 block rounded-md px-2 justify-between items-center w-full cursor-pointer">
-                      Categories <ChevronDownIcon size={16} />
-                    </div>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    side="right"
-                    align="start"
-                    className="w-40"
-                  >
-                    <p className="px-2 py-1.5 text-sm font-bold">Categories</p>
-                    {categoryLinks.map((link, index) => (
-                      <DropdownMenuItem key={index} asChild>
-                        <a href={link.href}>{link.label}</a>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem
-                className="w-full"
-                role="presentation"
-                aria-hidden="true"
-              >
-                <div
-                  role="separator"
-                  className="bg-border -mx-1 my-1 h-px"
-                ></div>
-              </NavigationMenuItem>
-              <NavigationMenuItem className="w-full">
-                <NavigationMenuLink
-                  href="/login"
-                  className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-md px-2"
-                >
-                  <LogIn size={16} /> Login
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem className="w-full">
-                <NavigationMenuLink
-                  href="/register"
-                  className="py-1.5  items-center gap-2 font-medium hover:bg-accent/50 block rounded-md px-2"
-                >
-                  <LogIn size={16} /> Register
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-        </PopoverContent>
-        <PopoverTrigger asChild>
-          <Button
-            className="size-8 md:hidden"
-            variant="ghost"
-            size="icon"
-            aria-label="Toggle navigation menu"
-          >
-            <MenuIcon size={20} />
-          </Button>
-        </PopoverTrigger>
-      </li>
-    </ul>
-  </Popover>
-);
+// removed mobile menu; mobile view will show only logo, search and cart
 
 // --- Search Form ---
 const SearchForm = ({ id }: { id: string }) => (
-  <div className="relative hidden max-w-lg flex-1 md:block">
+  // show search on mobile and desktop; adjust max width
+  <div className="relative max-w-lg flex-1 block">
     <Input
       id={id}
       className="peer h-9 ps-9 pe-2 w-full placeholder:text-gray-300 placeholder:italic"
@@ -180,18 +104,23 @@ const SearchForm = ({ id }: { id: string }) => (
   </div>
 );
 
-// --- Right Actions (Desktop) ---
+// --- Right Actions ---
 const RightActions = () => (
   <nav>
     <ul>
       <li>
         <div className="flex items-center gap-2">
-          <Button asChild variant="ghost" size="sm" className="text-sm">
-            <a href="/login">Login</a>
-          </Button>
-          <Button asChild variant="secondary" size="sm" className="text-sm">
-            <a href="/register">Register</a>
-          </Button>
+          {/* Login/Register only on desktop */}
+          <div className="hidden md:flex items-center gap-2">
+            <Button asChild variant="ghost" size="sm" className="text-sm">
+              <a href="/login">Login</a>
+            </Button>
+            <Button asChild variant="secondary" size="sm" className="text-sm">
+              <a href="/register">Register</a>
+            </Button>
+          </div>
+
+          {/* Cart: visible on mobile and desktop */}
           <Button asChild size="sm" className="text-sm rounded-md">
             <a href="/cart" className="flex items-center gap-2">
               <ShoppingCart size={16} />
@@ -210,7 +139,6 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 border-b bg-white/30 dark:bg-dark-950/50 backdrop-blur-2xl transition-all duration-300 w-full">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:px-6">
         <div className="flex items-center gap-4">
-          <MobileMenu />
           <a
             href="/"
             aria-label="Arcbooks Home"
@@ -219,12 +147,18 @@ export default function Navbar() {
             <img
               src="/arcbooks-logo.svg"
               alt="Arcbooks Logo"
-              className="h-20"
+              className="h-10 md:h-20"
             />
           </a>
         </div>
 
-        <div className="flex w-full max-w-xl mx-auto flex-1 items-center justify-start gap-8 max-md:hidden">
+        {/* Mobile: show compact search between logo and actions */}
+        <div className="flex-1 px-2 md:hidden">
+          <SearchForm id={id} />
+        </div>
+
+        {/* Desktop navigation (categories + search) */}
+        <div className="hidden md:flex w-full max-w-xl mx-auto flex-1 items-center justify-start gap-8">
           <CategoryDropdown />
 
           <SearchForm id={id} />
