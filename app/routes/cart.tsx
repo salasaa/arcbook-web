@@ -33,16 +33,15 @@ export async function clientLoader() {
     return redirect("/login");
   }
 
-  const meResponse: Cart = await response.json();
-  return { meResponse };
+  const cart: Cart = await response.json();
+  return { cart };
 }
 
 export default function CartRoute({ loaderData }: Route.ComponentProps) {
-  const { meResponse } = loaderData;
+  const { cart } = loaderData;
 
-  const initialItems = (meResponse as Cart | undefined)?.items || [];
+  const initialItems = (cart as Cart | undefined)?.items || [];
 
-  // local state for quantity UI updates
   const [items, setItems] = useState(() =>
     initialItems.map((it) => ({ ...it }))
   );

@@ -37,7 +37,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 
   const addCartItemData = {
     productId: String(formData.get("productId")),
-    quantity: Number(formData.get("quantity")),
+    quantity: Number(formData.get("quantity") || 1),
   };
 
   if (!token) return redirect("/login");
@@ -45,7 +45,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   const response = await fetch(
     `${import.meta.env.VITE_BACKEND_API_URL}/cart/items`,
     {
-      method: "POST",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -140,7 +140,12 @@ export default function ProductsSlugRoute({
             </div>
 
             <div className="flex flex-row items-center gap-4 mb-8">
-              <Form method="POST" className="flex w-full gap-4">
+              <Form method="PUT" className="flex w-full gap-4">
+                <input
+                  type="hidden"
+                  name="productId"
+                  defaultValue={product.id}
+                />
                 <div>
                   <label
                     htmlFor="quantity"

@@ -7,6 +7,7 @@ import {
   ChevronDownIcon,
   CircleUserRoundIcon,
   LogOutIcon,
+  LogInIcon,
 } from "lucide-react";
 // import { ModeToggle } from '@/components/mode-toggle';
 import { Button } from "~/components/ui/button";
@@ -188,6 +189,13 @@ export default function Navbar() {
                   </span>
                 </div>
               </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <a href="/dashboard" className="flex items-center gap-2">
+                  <LogInIcon size={16} />
+                  Dashboard
+                </a>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={handleLogout}
