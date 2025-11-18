@@ -1,19 +1,16 @@
-import { useId } from "react";
-import { SearchIcon, ShoppingCart, ChevronDownIcon } from "lucide-react";
+import Cookies from "js-cookie";
+
+import { useId, useState } from "react";
+import {
+  SearchIcon,
+  ShoppingCart,
+  ChevronDownIcon,
+  CircleUserRoundIcon,
+  LogOutIcon,
+} from "lucide-react";
 // import { ModeToggle } from '@/components/mode-toggle';
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "~/components/ui/navigation-menu";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "~/components/ui/popover";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,8 +22,9 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
   DropdownMenuPortal,
+  DropdownMenuLabel,
 } from "~/components/ui/dropdown-menu";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const categoryLinks = [
   { href: "/categories/comics", label: "Comics" },
@@ -85,12 +83,8 @@ const CategoryDropdown = () => (
   </DropdownMenu>
 );
 
-// --- Mobile Menu ---
-// removed mobile menu; mobile view will show only logo, search and cart
-
 // --- Search Form ---
 const SearchForm = ({ id }: { id: string }) => (
-  // show search on mobile and desktop; adjust max width
   <div className="relative max-w-lg flex-1 block">
     <Input
       id={id}
@@ -104,36 +98,24 @@ const SearchForm = ({ id }: { id: string }) => (
   </div>
 );
 
-// --- Right Actions ---
-const RightActions = () => (
-  <nav>
-    <ul>
-      <li>
-        <div className="flex items-center gap-2">
-          {/* Login/Register only on desktop */}
-          <div className="hidden md:flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm" className="text-sm">
-              <a href="/login">Login</a>
-            </Button>
-            <Button asChild variant="secondary" size="sm" className="text-sm">
-              <a href="/register">Register</a>
-            </Button>
-          </div>
-
-          {/* Cart: visible on mobile and desktop */}
-          <Button asChild size="sm" className="text-sm rounded-md">
-            <a href="/cart" className="flex items-center gap-2">
-              <ShoppingCart size={16} />
-            </a>
-          </Button>
-        </div>
-      </li>
-    </ul>
-  </nav>
-);
-
 export default function Navbar() {
   const id = useId();
+
+  const navigate = useNavigate();
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const userToken = Cookies.get("token");
+
+  const isLoggedIn = userToken !== undefined;
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+
+    setIsDropdownOpen(false);
+
+    navigate("/");
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b bg-white/30 dark:bg-dark-950/50 backdrop-blur-2xl transition-all duration-300 w-full">
@@ -164,7 +146,68 @@ export default function Navbar() {
           <SearchForm id={id} />
         </div>
 
-        <RightActions />
+        <div className="flex items-center gap-2">
+          <Button asChild size="sm" variant="outline">
+            <a href="/cart" className="flex items-center gap-2">
+              <ShoppingCart size={16} />
+            </a>
+          </Button>
+        </div>
+
+        {isLoggedIn ? (
+          <DropdownMenu
+            open={isDropdownOpen}
+            onOpenChange={setIsDropdownOpen}
+            modal={false}
+          >
+            <DropdownMenuTrigger asChild>
+              <Button
+                size="icon"
+                variant="outline"
+                aria-label="Open account menu"
+              >
+                <CircleUserRoundIcon size={16} aria-hidden="true" />
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent align="end" sideOffset={10} className="w-35">
+              <DropdownMenuLabel className="flex items-start gap-2">
+                <img
+                  src="/origin/avatar.jpg"
+                  alt="Avatar"
+                  width={30}
+                  height={30}
+                  className="shrink-0 rounded-full"
+                />
+                <div className="flex min-w-0 flex-col">
+                  <span className="truncate text-sm font-medium text-foreground">
+                    Keith Kennedy
+                  </span>
+                  <span className="truncate text-xs font-normal text-muted-foreground">
+                    k.kennedy@coss.com
+                  </span>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={handleLogout}
+                className="cursor-pointer"
+              >
+                <LogOutIcon size={16} />
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <div className="flex items-center gap-2">
+            <Button asChild variant="ghost" size="sm" className="text-sm">
+              <a href="/login">Login</a>
+            </Button>
+            <Button asChild variant="secondary" size="sm" className="text-sm">
+              <a href="/register">Register</a>
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   );

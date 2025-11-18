@@ -9,7 +9,6 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { Skeleton } from "./components/ui/skeleton";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -39,17 +38,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  );
-}
-
-export function HydrateFallback() {
-  return (
-    <div className="flex flex-col items-center justify-center p-8 space-y-3">
-      <Skeleton className="h-8 w-8 text-primary animate-spin" />
-      <div className="text-lg font-medium text-gray-600 dark:text-gray-400">
-        Loading products...
-      </div>
-    </div>
   );
 }
 
